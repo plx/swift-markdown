@@ -127,10 +127,10 @@ public extension BlockDirective {
         }
         set {
             _data = _data.replacingSelf(.blockDirective(name: newValue,
-                                                      nameLocation: nil,
-                                                      argumentText: argumentText,
-                                                      parsedRange: nil,
-                                                      _data.raw.markup.copyChildren()))
+                                                        nameLocation: nil,
+                                                        argumentText: argumentText,
+                                                        parsedRange: nil,
+                                                        _data.raw.markup.copyChildren()))
         }
     }
 
@@ -165,10 +165,10 @@ public extension BlockDirective {
         }
         set {
             _data = _data.replacingSelf(.blockDirective(name: name,
-                                                      nameLocation: nil,
-                                                      argumentText: newValue,
-                                                      parsedRange: nil,
-                                                      _data.raw.markup.copyChildren()))
+                                                        nameLocation: nil,
+                                                        argumentText: newValue,
+                                                        parsedRange: nil,
+                                                        _data.raw.markup.copyChildren()))
         }
     }
 
