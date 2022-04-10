@@ -98,11 +98,9 @@ public extension BlockDirective {
                                                                                              lineStartIndex: untrimmedText.startIndex,
                                                                                              range: nil)
                                                    } ?? []
-        try! self.init(.blockDirective(name: name,
-                                       nameLocation: nil,
-                                       argumentText: DirectiveArgumentText(segments: argumentSegments),
-                                       parsedRange: nil,
-                                       children.map { $0.raw.markup }))
+        self.init(name: name,
+                  directiveArgumentText: DirectiveArgumentText(segments: argumentSegments),
+                  children: children)
     }
 
     /// Create a block directive.
@@ -115,6 +113,32 @@ public extension BlockDirective {
          children: BlockMarkup...) {
         self.init(name: name, argumentText: argumentText, children: children)
     }
+
+  /// Create a block directive.
+  ///
+  /// - parameter name: The name of the directive.
+  /// - parameter directiveArgumentText: The text to use when interpreting arguments to the directive.
+  /// - parameter children: block child elements.
+  init<Children: Sequence>(name: String,
+                           directiveArgumentText: DirectiveArgumentText,
+                           children: Children) where Children.Element == BlockMarkup {
+    try! self.init(.blockDirective(name: name,
+                                   nameLocation: nil,
+                                   argumentText: directiveArgumentText,
+                                   parsedRange: nil,
+                                   children.map { $0.raw.markup }))
+  }
+  
+  /// Create a block directive.
+  ///
+  /// - parameter name: The name of the directive.
+  /// - parameter directiveArgumentText: The text to use when interpreting arguments to the directive.
+  /// - parameter children: block child elements.
+  init(name: String,
+       directiveArgumentText: DirectiveArgumentText,
+       children: BlockMarkup...) {
+    self.init(name: name, directiveArgumentText: directiveArgumentText, children: children)
+  }
 
     /// The name of the directive.
     var name: String {
